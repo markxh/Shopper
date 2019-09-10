@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':shopsdk'
 rootProject.name='Shopper'
