@@ -1,8 +1,11 @@
 package com.entersekt.shopper
 
 import android.os.Bundle
-import com.entersekt.shopsdk.data.Mall
-import com.entersekt.shopsdk.data.Shop
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.entersekt.shopper.adapters.ShopAdapter
+import com.entersekt.shopper.viewModels.ShopsViewModel
+import com.entersekt.shopper.viewModels.ShopsViewModelFactory
 import kotlinx.android.synthetic.main.activity_cities.*
 import kotlinx.android.synthetic.main.activity_shops.*
 
@@ -13,11 +16,19 @@ class ShopsActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shops)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setSupportActionBar(toolbar)
 
-        val bundle = intent.getBundleExtra("bundle")
+        val mallId = intent.extras.getInt("mallId")
 
-        shopAdapter = ShopAdapter(bundle.getParcelable<Mall>("mall")?.shops)
-        recyclerView.adapter = shopAdapter
+        val shopsViewModel = ViewModelProviders.of(this, ShopsViewModelFactory(this.application, mallId))
+            .get(ShopsViewModel::class.java)
+
+        shopsViewModel.mall?.observe(this, Observer {
+            shopAdapter = ShopAdapter(it.shops)
+            recyclerView.adapter = shopAdapter
+            shopsViewModel.saveShops(it.shops)
+        })
     }
 }

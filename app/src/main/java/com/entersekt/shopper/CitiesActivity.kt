@@ -1,7 +1,7 @@
 package com.entersekt.shopper
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.entersekt.shopper.adapters.CityAdapter

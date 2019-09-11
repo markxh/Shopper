@@ -33,9 +33,7 @@ class MallAdapter(val mallItems: List<Mall>?) : RecyclerView.Adapter<MallAdapter
         holder.itemView.mall_item_title.text = mallItems!![position].name
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, ShopsActivity::class.java)
-            val bundle = Bundle()
-            bundle.putParcelable("mall", mallItems[position])
-            intent.putExtra("bundle", bundle)
+            intent.putExtra("mallId", mallItems[position].id)
             ContextCompat.startActivity(it.context, intent, null)
         }
     }

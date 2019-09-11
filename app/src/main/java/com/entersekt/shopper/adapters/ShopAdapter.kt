@@ -1,9 +1,10 @@
-package com.entersekt.shopper
+package com.entersekt.shopper.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.entersekt.shopper.R
 import com.entersekt.shopsdk.data.Shop
 import kotlinx.android.synthetic.main.list_item_shop.view.*
 

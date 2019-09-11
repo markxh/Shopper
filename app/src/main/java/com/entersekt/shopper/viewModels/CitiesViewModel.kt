@@ -1,13 +1,19 @@
 package com.entersekt.shopper.viewModels
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
 import com.entersekt.shopsdk.data.City
-import com.entersekt.shopsdk.data.Mall
 import com.entersekt.shopsdk.repository.CityRepository
 
-class CitiesViewModel : ViewModel() {
+class CitiesViewModel(application: Application): AndroidViewModel(application) {
 
-    val cityRepository = CityRepository()
-    val cities: LiveData<List<City>> get() = cityRepository.getAllCities()
+    private val cityRepository: CityRepository
+
+    internal val cities: LiveData<List<City>>
+
+    init {
+        cityRepository = CityRepository.getInstance(application)
+        cities = cityRepository.getAllCities()!!
+    }
 }

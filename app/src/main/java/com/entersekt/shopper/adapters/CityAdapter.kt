@@ -31,9 +31,7 @@ class CityAdapter(val cityItems: List<City>?) : RecyclerView.Adapter<CityAdapter
         holder.itemView.city_item_title.text = cityItems!![position].name
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, MallsActivity::class.java)
-            val bundle = Bundle()
-            bundle.putParcelable("city", cityItems[position])
-            intent.putExtra("bundle", bundle)
+            intent.putExtra("cityId", cityItems[position].id)
             ContextCompat.startActivity(it.context, intent, null)
         }
     }
